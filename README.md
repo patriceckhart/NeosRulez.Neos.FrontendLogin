@@ -25,6 +25,14 @@ NeosRulez:
         templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Reset.html'
 ```
 
+## Usage
+
+There are three different finishers for the Neos Form Builder. The `Create User Finisher`, the `Update User Finisher` and the `Reset Password Finisher`. That is self-explanatory, use it as you need it. 
+
+In addition, there is a validator for the Neos Form Builder which checks whether a username already exists or not. The behavior of this validator can be influenced in the node properties.
+
+The user data from the forms are saved in the database as a json string. Property getters and setters are in the user model and can be used in your own extensions or backend modules.
+
 ## Author
 
 * E-Mail: mail@patriceckhart.com
