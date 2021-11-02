@@ -1,0 +1,12 @@
+prototype(NeosRulez.Neos.FrontendLogin:Content.Login) < prototype(Neos.Neos:ContentComponent) {
+
+    reset = ${node.properties.reset}
+    redirectAfterLogin = ${node.properties.redirectAfterLogin}
+    redirectAfterLogout = ${node.properties.redirectAfterLogout}
+
+    renderer = afx`
+        <NeosRulez.Bootstrap:Component.AbstractContent>
+            <NeosRulez.Neos.FrontendLogin:Component.Login reset={props.reset} redirectAfterLogin={props.redirectAfterLogin} redirectAfterLogout={props.redirectAfterLogout} />
+        </NeosRulez.Bootstrap:Component.AbstractContent>
+    `
+}

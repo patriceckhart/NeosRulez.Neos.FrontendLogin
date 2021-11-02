@@ -1,0 +1,27 @@
+'NeosRulez.Neos.FrontendLogin:Finisher.CreateUserFinisher':
+  superTypes:
+    'Neos.Form.Builder:AbstractFinisher': true
+  ui:
+    label: Create user finisher
+    icon: fas fa-user-plus
+    inspector:
+      groups:
+        finisher:
+          icon: fas fa-user-plus
+  properties:
+    role:
+      type: string
+      ui:
+        label: Role
+        reloadPageIfChanged: true
+        inspector:
+          group: finisher
+    sendCredentials:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: Send credentials
+        reloadPageIfChanged: true
+        inspector:
+          group: finisher
+          position: after role

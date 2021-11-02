@@ -1,0 +1,40 @@
+NeosRulez.Neos.FrontendLogin.Module.UserController.edit = NeosRulez.Neos.FrontendLogin:Module.UserController.Edit
+
+prototype(NeosRulez.Neos.FrontendLogin:Module.UserController.Edit) < prototype(Neos.Fusion:Component) {
+
+    renderer = afx`
+        <NeosRulez.Neos.FrontendLogin:Component.DefaultLayout>
+
+            <Neos.Fusion.Form:Form form.target.action="update" form.data.user={user} >
+
+                <Neos.Fusion.Form:Hidden field.name="user" field.value={user} />
+
+                <Neos.Fusion:Loop items={user.properties} itemName="property" itemKey="propertyKey">
+
+                    <Neos.Fusion.Form:Neos.BackendModule.FieldContainer @if.render={!Type.isArray(property) && propertyKey != 'username'} field.name={'properties[' + propertyKey + ']'} label={propertyKey}>
+                        <Neos.Fusion.Form:Input attributes.placeholder={propertyKey} attributes.required={propertyKey == 'firstname' && propertyKey == 'lastname' ? true : false} attributes.value={property} />
+                    </Neos.Fusion.Form:Neos.BackendModule.FieldContainer>
+
+                    <ul @if.render={Type.isArray(property)} >
+                        <Neos.Fusion:Loop items={property} itemName="propertyItem" itemKey="propertyItemKey">
+                            <li>
+                                <Neos.Fusion.Form:Neos.BackendModule.FieldContainer field.name={'properties[' + propertyKey + '][' + propertyItemKey +']'} label={propertyKey + '-' + propertyItemKey}>
+                                    <Neos.Fusion.Form:Input attributes.placeholder={propertyItemKey} attributes.required={true} attributes.value={propertyItem} />
+                                </Neos.Fusion.Form:Neos.BackendModule.FieldContainer>
+                            </li>
+                        </Neos.Fusion:Loop>
+                    </ul>
+
+                </Neos.Fusion:Loop>
+
+                <div class="neos-footer">
+                    <Neos.Fusion.Form:Button attributes.class="neos-button neos-button-primary">
+                        Save changes
+                    </Neos.Fusion.Form:Button>
+                </div>
+
+            </Neos.Fusion.Form:Form>
+
+        </NeosRulez.Neos.FrontendLogin:Component.DefaultLayout>
+    `
+}

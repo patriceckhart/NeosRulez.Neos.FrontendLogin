@@ -1,0 +1,6 @@
+prototype(NeosRulez.Neos.FrontendLogin:Class.UserValues) {
+    @class = 'NeosRulez\\Neos\\FrontendLogin\\Fusion\\UserValuesFusion'
+    identifier = false
+}
+
+prototype(NeosRulez.Neos.FrontendLogin:UserValues) < prototype(NeosRulez.Neos.FrontendLogin:Class.UserValues)

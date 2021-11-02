@@ -1,0 +1,45 @@
+prototype(NeosRulez.Neos.FrontendLogin:Component.Login) < prototype(Neos.Fusion:Component) {
+
+    @context.redirectAfterLogin = ${this.redirectAfterLogin}
+    redirectAfterLoginTarget = Neos.Neos:NodeUri {
+        node = ${redirectAfterLogin}
+        absolute = true
+    }
+    @context.redirectAfterLogout = ${this.redirectAfterLogout}
+
+    isAuthenticated = ${Security.isAuthenticated()}
+
+    renderer = afx`
+        <NeosRulez.Neos.FrontendLogin:Component.Logout @if.render={props.isAuthenticated} redirectAfterLogout={redirectAfterLogout} />
+        <Neos.Fusion.Form:Form @if.render={!props.isAuthenticated} form.target.action="authenticate" form.target.controller="Login" form.target.package="NeosRulez.Neos.FrontendLogin" attributes.name="login" >
+
+            <Neos.Fusion.Form:Hidden @if.render={props.redirectAfterLogin} field.name="redirectAfterLoginTarget" field.value={props.redirectAfterLoginTarget} />
+
+            <div class="mb-3">
+                <Neos.Fusion.Form:Input
+                    field.name="__authentication[Neos][Flow][Security][Authentication][Token][UsernamePassword][username]"
+                    attributes.required="required"
+                    attributes.id="username"
+                    attributes.placeholder={I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.username')}
+                    attributes.class="form-control"
+                    attributes.autofocus="autofocus"
+                />
+            </div>
+
+            <div class="mb-3">
+                <Neos.Fusion.Form:Password
+                    field.name="__authentication[Neos][Flow][Security][Authentication][Token][UsernamePassword][password]"
+                    attributes.required="required"
+                    attributes.id="password"
+                    attributes.placeholder={I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.password')}
+                    attributes.class="form-control"
+                />
+            </div>
+
+            <Neos.Fusion.Form:Button attributes.class="btn btn-primary" >
+                {I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.login')}
+            </Neos.Fusion.Form:Button>
+
+        </Neos.Fusion.Form:Form>
+    `
+}

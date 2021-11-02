@@ -1,0 +1,19 @@
+'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator':
+  superTypes:
+    'Neos.Form.Builder:AbstractValidator': true
+  ui:
+    label: User exist Validator
+    icon: fas fa-user-check
+    position: end
+    inspector:
+      groups:
+        validator:
+          icon: fas fa-user-check
+  properties:
+    trueIfExist:
+      type: boolean
+      defaultValue: false
+      ui:
+        label: TRUE if exist
+        inspector:
+          group: validator

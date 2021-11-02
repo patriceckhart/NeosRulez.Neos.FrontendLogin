@@ -1,0 +1,24 @@
+-
+  name: 'Authenticate'
+  uriPattern: 'feuser/authenticate'
+  defaults:
+    '@package': 'NeosRulez.Neos.FrontendLogin'
+    '@controller': 'Login'
+    '@action': 'authenticate'
+  appendExceedingArguments: true
+-
+  name: 'Logout'
+  uriPattern: 'feuser/logout'
+  defaults:
+    '@package': 'NeosRulez.Neos.FrontendLogin'
+    '@controller': 'Login'
+    '@action': 'logout'
+  appendExceedingArguments: true
+-
+  name: 'Reset password'
+  uriPattern: 'feuser/reset'
+  defaults:
+    '@package': 'NeosRulez.Neos.FrontendLogin'
+    '@controller': 'Reset'
+    '@action': 'reset'
+  appendExceedingArguments: true

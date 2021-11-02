@@ -1,0 +1,71 @@
+NeosRulez.Neos.FrontendLogin.Module.UserController.index = NeosRulez.Neos.FrontendLogin:Module.UserController.Index
+
+prototype(NeosRulez.Neos.FrontendLogin:Module.UserController.Index) < prototype(Neos.Fusion:Component) {
+
+    i18nConfirm = ${I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.confirm')}
+
+    renderer = afx`
+        <NeosRulez.Neos.FrontendLogin:Component.DefaultLayout>
+
+            <p @if.render={Array.length(users) == 0 ? true : false} >{I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.noUsers')}</p>
+
+            <table @if.render={Array.length(users) > 0 ? true : false} class="neos-table">
+
+                <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>Firstname</td>
+                    <td>Lastname</td>
+                    <td>Modified</td>
+                    <td>Created</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <Neos.Fusion:Loop items={users} >
+                    <tr>
+                        <td>
+                            {item.properties.username}
+                        </td>
+                        <td>
+                            {item.properties.firstname}
+                        </td>
+                        <td>
+                            {item.properties.lastname}
+                        </td>
+                        <td>{Date.format(item.modified, 'Y-m-d H:i')}</td>
+                        <td>{Date.format(item.created, 'Y-m-d H:i')}</td>
+                        <td>
+                            <span @if.render={item.active} class="neos-badge" style="background:#00a338">
+                                {I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.active')}
+                            </span>
+                            <span @if.render={!item.active} class="neos-badge" style="background:#ff8700">
+                                {I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.inactive')}
+                            </span>
+                        </td>
+                        <td class="neos-action">
+                            <div class="neos-pull-right">
+                                <Neos.Fusion:Link.Action class="neos-button neos-button-primary" href.action="edit" href.arguments={{user: item}}>
+                                    <i class="fas fa-pen"></i>
+                                </Neos.Fusion:Link.Action>
+                                <Neos.Fusion:Link.Action @if.render={!item.active} class="neos-button neos-button-success" href.action="activate" href.arguments={{user: item}}>
+                                    <i class="fas fa-check"></i>
+                                </Neos.Fusion:Link.Action>
+                                <Neos.Fusion:Link.Action @if.render={item.active} class="neos-button neos-button-warning" href.action="deactivate" href.arguments={{user: item}}>
+                                    <i class="fas fa-ban"></i>
+                                </Neos.Fusion:Link.Action>
+                                <Neos.Fusion:Link.Action class="neos-button neos-button-danger" href.action="remove" href.arguments={{user: item}} onclick={'return confirm("' + I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.confirm') + '");'}>
+                                    <i class="fas fa-trash"></i>
+                                </Neos.Fusion:Link.Action>
+                            </div>
+                        </td>
+                    </tr>
+                </Neos.Fusion:Loop>
+                </tbody>
+
+            </table>
+
+        </NeosRulez.Neos.FrontendLogin:Component.DefaultLayout>
+    `
+}

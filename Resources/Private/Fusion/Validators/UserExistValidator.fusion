@@ -1,0 +1,6 @@
+prototype(NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator.Definition) < prototype(Neos.Form.Builder:Validator.Definition) {
+    formElementType = 'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator'
+    options {
+        trueIfExist = false
+    }
+}

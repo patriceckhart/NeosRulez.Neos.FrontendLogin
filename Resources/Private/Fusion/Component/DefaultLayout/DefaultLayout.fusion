@@ -1,0 +1,13 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: resource://Neos.Fusion.Form/Private/Fusion/Root.fusion
+
+prototype(NeosRulez.Neos.FrontendLogin:Component.DefaultLayout) < prototype(Neos.Fusion:Component) {
+    content = ''
+
+    renderer = afx`
+        <div class="neos-row-fluid neos-module-container">
+            {props.content}
+        </div>
+    `
+    @process.debugDump = Neos.Fusion:DebugDump
+}

@@ -1,0 +1,6 @@
+'Neos.Form.Builder:SingleLineText':
+  childNodes:
+    validators:
+      constraints:
+        nodeTypes:
+          'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator': true

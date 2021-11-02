@@ -1,0 +1,6 @@
+prototype(NeosRulez.Neos.FrontendLogin:Finisher.UpdateUserFinisher.Definition) < prototype(Neos.Form.Builder:Finisher.Definition) {
+    formElementType = 'NeosRulez.Neos.FrontendLogin:Finisher.UpdateUserFinisher'
+    options {
+        node = ${node}
+    }
+}

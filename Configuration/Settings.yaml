@@ -1,0 +1,88 @@
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'NeosRulez.Neos.FrontendLogin': true
+    security:
+      authentication:
+        providers:
+          'NeosRulez.Neos.FrontendLogin:NeosFrontend':
+            provider: PersistedUsernamePasswordProvider
+            requestPatterns:
+              'NeosRulez.Neos.FrontendLogin:NeosFrontend':
+                pattern: NeosRulez\Neos\FrontendLogin\Security\NeosRequestPattern
+                patternOptions:
+                  matchFrontend: true
+  Neos:
+    eventLog:
+      enabled: true
+    userInterface:
+      translation:
+        autoInclude:
+          NeosRulez.Neos.FrontendLogin:
+            - 'Component/*'
+            - 'NodeTypes/*'
+            - 'Modules/*'
+    nodeTypes:
+      groups:
+        neosrulezNeosFrontendlogin:
+          position: end
+          label: Frontend Login
+    fusion:
+      autoInclude:
+        NeosRulez.Neos.FrontendLogin: true
+    modules:
+      frontendlogin:
+        label: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:ui.label
+        controller: '\Neos\Neos\Controller\Module\ManagementController'
+        description: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:ui.description
+        icon: 'fas fa-unlock'
+        resource: 'Neos_Neos_Backend_Module_Management'
+        submodules:
+          user:
+            label: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:user.ui.label
+            controller: '\NeosRulez\Neos\FrontendLogin\Controller\Module\UserController'
+            description: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:user.ui.description
+            icon: 'fas fa-user'
+            actions:
+              index:
+                label: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:user.ui.label
+                title: NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:user.ui.label
+  Form:
+    presets:
+      default:
+        finisherPresets:
+          'NeosRulez.Neos.FrontendLogin:Finisher.CreateUserFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\CreateUserFinisher
+            options: { }
+          'NeosRulez.Neos.FrontendLogin:Finisher.UpdateUserFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\UpdateUserFinisher
+            options: { }
+          'NeosRulez.Neos.FrontendLogin:Finisher.ResetPasswordFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\ResetPasswordFinisher
+            options: { }
+        validatorPresets:
+          'NeosRulez.Neos.FrontendLogin:UserExistValidator':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Validation\Validator\UserExistValidator
+      bootstrap:
+        finisherPresets:
+          'NeosRulez.Neos.FrontendLogin:Finisher.CreateUserFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\CreateUserFinisher
+            options: {  }
+          'NeosRulez.Neos.FrontendLogin:Finisher.UpdateUserFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\UpdateUserFinisher
+            options: { }
+          'NeosRulez.Neos.FrontendLogin:Finisher.ResetPasswordFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\ResetPasswordFinisher
+            options: { }
+        validatorPresets:
+          'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Validator\UserExistValidator
+NeosRulez:
+  Neos:
+    FrontendLogin:
+      senderMail: 'noreply@foo.com'
+      createUser:
+        templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Create.html'
+      resetPassword:
+        templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Reset.html'

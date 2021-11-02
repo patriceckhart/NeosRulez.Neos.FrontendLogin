@@ -1,0 +1,7 @@
+prototype(NeosRulez.Neos.FrontendLogin:Component.AbstractContent) < prototype(Neos.Fusion:Component) {
+    content = ''
+
+    renderer = afx`
+        {props.content}
+    `
+}

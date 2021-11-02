@@ -1,0 +1,19 @@
+prototype(NeosRulez.Neos.FrontendLogin:Component.Logout) < prototype(Neos.Fusion:Component) {
+
+    @context.redirectAfterLogout = ${this.redirectAfterLogout}
+    redirectAfterLogoutTarget = Neos.Neos:NodeUri {
+        node = ${redirectAfterLogout}
+        absolute = true
+    }
+
+    renderer = afx`
+        <Neos.Fusion.Form:Form form.target.action="logout" form.target.controller="Login" form.target.package="NeosRulez.Neos.FrontendLogin" attributes.name="logout" >
+
+            <Neos.Fusion.Form:Hidden @if.render={props.redirectAfterLogout} field.name="redirectAfterLogoutTarget" field.value={props.redirectAfterLogoutTarget} />
+
+            <Neos.Fusion.Form:Button attributes.class="btn btn-primary" >
+                {I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Logout:content.logout')}
+            </Neos.Fusion.Form:Button>
+        </Neos.Fusion.Form:Form>
+    `
+}

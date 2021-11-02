@@ -1,0 +1,8 @@
+prototype(Neos.Form.Builder:NodeBasedFormElement) {
+    @context.fillUpValue = NeosRulez.Neos.FrontendLogin:UserValues {
+        identifier = ${elementNode.properties.identifier}
+    }
+    element {
+        defaultValue = ${fillUpValue ? fillUpValue : ''}
+    }
+}

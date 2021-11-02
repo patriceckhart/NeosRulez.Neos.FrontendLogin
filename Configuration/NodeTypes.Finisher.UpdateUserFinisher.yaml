@@ -1,0 +1,10 @@
+'NeosRulez.Neos.FrontendLogin:Finisher.UpdateUserFinisher':
+  superTypes:
+    'Neos.Form.Builder:AbstractFinisher': true
+  ui:
+    label: Update user finisher
+    icon: fas fa-user-edit
+    inspector:
+      groups:
+        finisher:
+          icon: fas fa-user-edit
