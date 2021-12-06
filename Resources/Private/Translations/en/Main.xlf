@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="NeosRulez.Neos.FrontendLogin" source-language="en" datatype="plaintext">
+        <body>
+            <trans-unit id="content.failure.title" xml:space="preserve">
+				<source>Error at logging in</source>
+			</trans-unit>
+            <trans-unit id="content.failure.message" xml:space="preserve">
+				<source>Username or password is not correct</source>
+			</trans-unit>
+            <trans-unit id="content.subjectCreate" xml:space="preserve">
+				<source>Your accessdata</source>
+			</trans-unit>
+            <trans-unit id="content.subjectReset" xml:space="preserve">
+				<source>Password has been reset</source>
+			</trans-unit>
+        </body>
+    </file>
+</xliff>
