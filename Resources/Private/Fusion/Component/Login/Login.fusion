@@ -9,13 +9,19 @@ prototype(NeosRulez.Neos.FrontendLogin:Component.Login) < prototype(Neos.Fusion:
 
     isAuthenticated = ${Security.isAuthenticated()}
 
+    @context.floatingLabels = ${this.floatingLabels ? this.floatingLabels : (node.properties.floatingLabels ? node.properties.floatingLabels : false)}
+    @context.showLabels = ${this.showLabels ? this.showLabels : (node.properties.showLabels ? node.properties.showLabels : false)}
+
     renderer = afx`
+        <NeosRulez.Neos.FrontendLogin:Component.Login.FlashMessage />
+
         <NeosRulez.Neos.FrontendLogin:Component.Logout @if.render={props.isAuthenticated} redirectAfterLogout={redirectAfterLogout} />
         <Neos.Fusion.Form:Form @if.render={!props.isAuthenticated} form.target.action="authenticate" form.target.controller="Login" form.target.package="NeosRulez.Neos.FrontendLogin" attributes.name="login" >
 
             <Neos.Fusion.Form:Hidden @if.render={props.redirectAfterLogin} field.name="redirectAfterLoginTarget" field.value={props.redirectAfterLoginTarget} />
 
-            <div class="mb-3">
+            <div class={(floatingLabels ? 'form-floating ' : '') + 'mb-3'}>
+                <label @if.render={showLabels} for="username">{I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.username')}</label>
                 <Neos.Fusion.Form:Input
                     field.name="__authentication[Neos][Flow][Security][Authentication][Token][UsernamePassword][username]"
                     attributes.required="required"
@@ -24,9 +30,11 @@ prototype(NeosRulez.Neos.FrontendLogin:Component.Login) < prototype(Neos.Fusion:
                     attributes.class="form-control"
                     attributes.autofocus="autofocus"
                 />
+                <label @if.render={floatingLabels} for="username">{I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.username')}</label>
             </div>
 
-            <div class="mb-3">
+            <div class={(floatingLabels ? 'form-floating ' : '') + 'mb-3'}>
+                <label @if.render={showLabels} for="username">{I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.password')}</label>
                 <Neos.Fusion.Form:Password
                     field.name="__authentication[Neos][Flow][Security][Authentication][Token][UsernamePassword][password]"
                     attributes.required="required"
@@ -34,6 +42,7 @@ prototype(NeosRulez.Neos.FrontendLogin:Component.Login) < prototype(Neos.Fusion:
                     attributes.placeholder={I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.password')}
                     attributes.class="form-control"
                 />
+                <label @if.render={floatingLabels} for="username">{I18n.translate('NeosRulez.Neos.FrontendLogin:Component.Login:content.password')}</label>
             </div>
 
             <Neos.Fusion.Form:Button attributes.class="btn btn-primary" >

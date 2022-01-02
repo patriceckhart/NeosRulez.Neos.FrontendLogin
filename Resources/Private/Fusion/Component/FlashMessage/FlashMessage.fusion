@@ -1,0 +1,42 @@
+prototype(NeosRulez.Neos.FrontendLogin:Component.Login.FlashMessage) < prototype(Neos.Fusion:Component) {
+
+    renderer = afx`
+        <div id={'flashmessages'}></div>
+        <script>{"
+        function getNeosFrontendLoginCookie(cookiename) {
+            if (typeof(cookiename) == 'string' && cookiename != '') {
+                const cookies = document.cookie.split(';');
+                for (i = 0; i < cookies.length; i++) {
+                    if (cookies[i].trim().startsWith(cookiename)) {
+                        return cookies[i].split('=')[1];
+                    }
+                }
+            }
+            return null;
+        }
+        function removeNeosFrontendLoginCookie() {
+            document.cookie = 'Neos_Flow_FlashMessages_Neos_FrontendLogin' + '=; path=/; Max-Age=Session'
+        }
+        if(getNeosFrontendLoginCookie('Neos_Flow_FlashMessages_Neos_FrontendLogin')) {
+            var flashMessages = document.cookie.split('; ').find(row => row.startsWith('Neos_Flow_FlashMessages_Neos_FrontendLogin=')).split('=')[1];
+            const flashMessagesObj = JSON.parse(decodeURIComponent(flashMessages));
+            var flashMessagesDiv = document.getElementById('flashmessages');
+            var flashMessagesUl = document.createElement('ul');
+            flashMessagesUl.className = 'neos-frontendlogin-flashmessages';
+            flashMessagesUl.setAttribute('id', 'neos-frontendlogin-flashmessages-list');
+            for (var flashMessage in flashMessagesObj) {
+                var title = flashMessagesObj[flashMessage].title.split('+').join(' ');
+                var renderedMessage = flashMessagesObj[flashMessage].renderedMessage.split('+').join(' ');
+                var severity = flashMessagesObj[flashMessage].severity;
+                var flashMessagesLi = document.createElement('li');
+                flashMessagesLi.className = 'flashmessages-' + severity.toLowerCase();
+                flashMessagesLi.setAttribute('data-type', severity.toLowerCase());
+                flashMessagesLi.innerHTML = '<h3>' + title + '</h3>' + renderedMessage;
+                flashMessagesUl.appendChild(flashMessagesLi);
+            }
+            flashMessagesDiv.appendChild(flashMessagesUl);
+            removeNeosFrontendLoginCookie();
+        }
+        "}</script>
+    `
+}

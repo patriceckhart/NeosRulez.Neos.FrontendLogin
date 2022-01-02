@@ -3,6 +3,12 @@ Neos:
     mvc:
       routes:
         'NeosRulez.Neos.FrontendLogin': true
+      flashMessages:
+        containers:
+          'frontendLoginFlashMessages':
+            storage: 'Neos\Flow\Mvc\FlashMessage\Storage\FlashMessageCookieStorage'
+            storageOptions:
+              cookieName: 'Neos_Flow_FlashMessages_Neos_FrontendLogin'
     security:
       authentication:
         providers:

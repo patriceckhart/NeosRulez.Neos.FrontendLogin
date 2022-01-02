@@ -6,9 +6,15 @@ use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Security\Authentication\Controller\AbstractAuthenticationController;
 use Neos\Flow\Mvc\RequestInterface;
 use Neos\Flow\Security\RequestPatternInterface;
+use Neos\Fusion\View\FusionView;
 
 class LoginController extends AbstractAuthenticationController
 {
+
+    /**
+     * @var string
+     */
+    protected $defaultViewObjectName = FusionView::class;
 
     /**
      * @Flow\Inject
