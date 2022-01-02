@@ -20,6 +20,12 @@
             <trans-unit id="properties.reset" xml:space="preserve">
 				<source>Passwort zurücksetzen</source>
 			</trans-unit>
+			<trans-unit id="properties.floatingLabels" xml:space="preserve">
+				<source>Schwebende Labels</source>
+			</trans-unit>
+			<trans-unit id="properties.showLabels" xml:space="preserve">
+				<source>Labels anzeigen</source>
+			</trans-unit>
         </body>
     </file>
 </xliff>

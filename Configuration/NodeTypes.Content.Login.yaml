@@ -28,3 +28,23 @@
         inspector:
           group: neosrulezNeosFrontendloginLogin
           position: 2
+    floatingLabels:
+      type: boolean
+      defaultValue: false
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          hidden: 'ClientEval:node.properties.showLabels ? true : false'
+          group: neosrulezNeosFrontendloginLogin
+          position: 3
+    showLabels:
+      type: boolean
+      defaultValue: false
+      ui:
+        reloadIfChanged: true
+        label: i18n
+        inspector:
+          hidden: 'ClientEval:node.properties.floatingLabels ? true : false'
+          group: neosrulezNeosFrontendloginLogin
+          position: 4
