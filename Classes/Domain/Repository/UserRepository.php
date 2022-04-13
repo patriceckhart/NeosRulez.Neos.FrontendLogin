@@ -25,6 +25,7 @@ class UserRepository extends Repository
         $newUser->setProperties(json_encode($properties, JSON_FORCE_OBJECT));
         $newUser->setModified(new \DateTime);
         $newUser->setUser($user);
+        $newUser->setActive($properties['active']);
         $this->add($newUser);
     }
 }

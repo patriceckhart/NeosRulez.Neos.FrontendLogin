@@ -97,6 +97,7 @@ class UserController extends ActionController
      */
     public function removeAction(\NeosRulez\Neos\FrontendLogin\Domain\Model\User $user):void
     {
+        $this->userService->deleteUser($user->getUser());
         $this->userRepository->remove($user);
         $this->persistenceManager->persistAll();
         $this->redirect('index');

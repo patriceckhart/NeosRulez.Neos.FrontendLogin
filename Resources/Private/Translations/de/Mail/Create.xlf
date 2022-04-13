@@ -5,6 +5,9 @@
             <trans-unit id="content.header" xml:space="preserve">
 				<source>Ihre Zugangsdaten</source>
 			</trans-unit>
+            <trans-unit id="content.userMustFirstBeConfirmed" xml:space="preserve">
+				<source>Ihr Account wird in Kürze freigeschalten</source>
+			</trans-unit>
         </body>
     </file>
 </xliff>

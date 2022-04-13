@@ -90,5 +90,7 @@ NeosRulez:
       senderMail: 'noreply@foo.com'
       createUser:
         templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Create.html'
+        confirmation:
+          templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Confirmation.html'
       resetPassword:
         templatePathAndFilename: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Mail/Reset.html'

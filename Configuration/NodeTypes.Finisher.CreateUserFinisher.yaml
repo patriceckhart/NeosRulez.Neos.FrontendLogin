@@ -25,3 +25,20 @@
         inspector:
           group: finisher
           position: after role
+    adminConfirmation:
+      type: boolean
+      ui:
+        label: Admin confirmation
+        reloadPageIfChanged: true
+        inspector:
+          group: finisher
+          position: after sendCredentials
+    adminMail:
+      type: string
+      ui:
+        label: Admin mail
+        reloadPageIfChanged: true
+        inspector:
+          hidden: 'ClientEval:node.properties.adminConfirmation ? false : true'
+          group: finisher
+          position: after adminConfirmation

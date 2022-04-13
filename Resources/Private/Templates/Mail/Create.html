@@ -2,4 +2,7 @@
     <h2>{f:translate(id: 'content.header', package: 'NeosRulez.Neos.FrontendLogin', source: 'Mail/Create')}</h2>
     <p>{f:translate(id: 'label.username', package: 'NeosRulez.Neos.FrontendLogin', source: 'Mail/Credentials')}: {username}</p>
     <p>{f:translate(id: 'label.password', package: 'NeosRulez.Neos.FrontendLogin', source: 'Mail/Credentials')}: {password}</p>
+    <f:if condition="{adminConfirmation}">
+        <p><strong>{f:translate(id: 'content.userMustFirstBeConfirmed', package: 'NeosRulez.Neos.FrontendLogin', source: 'Mail/Create')}</strong></p>
+    </f:if>
 </div>
