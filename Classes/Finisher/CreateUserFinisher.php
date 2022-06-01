@@ -104,10 +104,10 @@ class CreateUserFinisher extends AbstractFinisher
                     $user = $this->userService->createUser($properties['username'], $password, $properties['firstname'], $properties['lastname'], [$role]);
                     $this->userRepository->createUser($properties, $user);
                     if($sendCredentials) {
-                        $this->mailService->sendMail($this->settings['createUser']['templatePathAndFilename'], ['username' => $properties['username'], 'password' => $password, 'adminConfirmation' => $adminConfirmation], $this->translator->translateById('content.subjectCreate', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $properties['username']);
+                        $this->mailService->sendMail($this->settings['createUser']['templatePathAndFilename'], ['properties' => $properties, 'username' => $properties['username'], 'password' => $password, 'adminConfirmation' => $adminConfirmation], $this->translator->translateById('content.subjectCreate', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $properties['username']);
                     }
                     if($adminConfirmation && $adminMail) {
-                        $this->mailService->sendMail($this->settings['createUser']['confirmation']['templatePathAndFilename'], ['username' => $properties['username']], $this->translator->translateById('content.subjectCreateConfirm', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $adminMail);
+                        $this->mailService->sendMail($this->settings['createUser']['confirmation']['templatePathAndFilename'], ['properties' => $properties, 'username' => $properties['username']], $this->translator->translateById('content.subjectCreateConfirm', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $adminMail);
                     }
                 } else {
                     throw new \Neos\Flow\Exception('Username must be an email address', 1347145544);
