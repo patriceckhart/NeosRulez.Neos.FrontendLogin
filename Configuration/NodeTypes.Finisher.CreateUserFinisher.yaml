@@ -11,6 +11,7 @@
   properties:
     role:
       type: string
+      defaultValue: 'NeosRulez.Neos.FrontendLogin:FrontendUser'
       ui:
         label: Role
         reloadPageIfChanged: true
