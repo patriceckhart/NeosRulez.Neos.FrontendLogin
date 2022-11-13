@@ -1,0 +1,13 @@
+prototype(NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection) < prototype(Neos.Neos:ContentComponent) {
+
+    nodes = Neos.Neos:ContentCollection {
+        @context.node = ${node}
+        attributes {
+            class = 'restricted-content-collection'
+        }
+    }
+
+    renderer = afx`
+        {props.nodes}
+    `
+}

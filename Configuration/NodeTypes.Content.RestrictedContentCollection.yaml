@@ -1,0 +1,15 @@
+'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection':
+  superTypes:
+    'Neos.Neos:Content': true
+    'Neos.Neos:ContentCollection': true
+  ui:
+    label: Restricted Content Collection
+    icon: fas fa-lock
+    group: neosrulezNeosFrontendlogin
+    help:
+      message: 'The content of this content collection is only visible to logged in frontend users and backend users.'
+  constraints:
+    nodeTypes:
+      '*': true
+      'Neos.Neos:Content': true
+      'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection': false

@@ -4,6 +4,9 @@ privilegeTargets:
       matcher: 'method(Neos\Flow\Security\Authentication\Controller\AbstractAuthenticationController->.*Action()) || method(NeosRulez\Neos\FrontendLogin\Controller\LoginController->.*Action())'
     'NeosRulez.Neos.FrontendLogin:Module.UserControllerActions':
       matcher: 'method(NeosRulez\Neos\FrontendLogin\Controller\Module\UserController->.*Action())'
+  Neos\ContentRepository\Security\Authorization\Privilege\Node\ReadNodePrivilege:
+    'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection':
+      matcher: 'nodeIsOfType("NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection")'
 roles:
   'Neos.Flow:Everybody':
     privileges:
@@ -15,5 +18,11 @@ roles:
       -
         privilegeTarget: 'NeosRulez.Neos.FrontendLogin:Module.UserControllerActions'
         permission: GRANT
+      -
+        privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection'
+        permission: GRANT
   'NeosRulez.Neos.FrontendLogin:FrontendUser':
-    privileges: []
+    privileges:
+      -
+        privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection'
+        permission: GRANT
