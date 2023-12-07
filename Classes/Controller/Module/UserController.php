@@ -3,6 +3,8 @@ namespace NeosRulez\Neos\FrontendLogin\Controller\Module;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Security\AccountRepository;
+use Neos\Flow\Security\Policy\Role;
 use Neos\Fusion\View\FusionView;
 
 class UserController extends ActionController
@@ -21,6 +23,12 @@ class UserController extends ActionController
      * @var \NeosRulez\Neos\FrontendLogin\Domain\Service\UserService
      */
     protected $userService;
+
+    /**
+     * @Flow\Inject
+     * @var AccountRepository
+     */
+    protected $accountRepository;
 
 
     /**
@@ -58,8 +66,14 @@ class UserController extends ActionController
         $user->setModified(new \DateTime());
         $this->userRepository->update($user);
         $name = new \Neos\Party\Domain\Model\PersonName('', $user->getProperty('firstname'), '', $user->getProperty('lastname'), '', $user->getProperty('username'));
-        $user->getUser()->setName($name);
-        $this->userService->updateUser($user->getUser());
+        $neosUser = $user->getUser();
+        $neosUser->setName($name);
+        $account = $neosUser->getAccounts()[0];
+        if(array_key_exists('role', $properties)) {
+            $account->setRoles([new Role($properties['role'])]);
+        }
+        $this->accountRepository->update($account);
+        $this->userService->updateUser($neosUser);
         $this->redirect('index');
     }
 
