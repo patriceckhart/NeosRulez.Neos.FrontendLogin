@@ -6,7 +6,12 @@ namespace NeosRulez\Neos\FrontendLogin\Finisher;
  */
 
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\I18n\Translator;
 use Neos\Form\Core\Model\AbstractFinisher;
+use Neos\Form\Exception\FinisherException;
+use NeosRulez\Neos\FrontendLogin\Domain\Repository\UserRepository;
+use NeosRulez\Neos\FrontendLogin\Domain\Service\MailService;
+use NeosRulez\Neos\FrontendLogin\Domain\Service\UserService;
 
 /**
  * This finisher create a new frontend user
@@ -16,19 +21,25 @@ class ResetPasswordFinisher extends AbstractFinisher
 
     /**
      * @Flow\Inject
-     * @var \NeosRulez\Neos\FrontendLogin\Domain\Service\UserService
+     * @var UserService
      */
     protected $userService;
 
     /**
      * @Flow\Inject
-     * @var \NeosRulez\Neos\FrontendLogin\Domain\Service\MailService
+     * @var UserRepository
+     */
+    protected $userRepository;
+
+    /**
+     * @Flow\Inject
+     * @var MailService
      */
     protected $mailService;
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\I18n\Translator
+     * @var Translator
      */
     protected $translator;
 
@@ -41,7 +52,8 @@ class ResetPasswordFinisher extends AbstractFinisher
      * @param array $settings
      * @return void
      */
-    public function injectSettings(array $settings) {
+    public function injectSettings(array $settings): void
+    {
         $this->settings = $settings;
     }
 
@@ -67,13 +79,23 @@ class ResetPasswordFinisher extends AbstractFinisher
                 $user = $this->userService->getUser($properties['username'], 'NeosRulez.Neos.FrontendLogin:NeosFrontend');
                 $password = $this->userService->generatePassword();
                 $this->userService->setUserPassword($user, $password);
-                $this->mailService->sendMail($this->settings['resetPassword']['templatePathAndFilename'], ['username' => $properties['username'], 'password' => $password], $this->translator->translateById('content.subjectReset', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $properties['username']);
+
+                $email = false;
+                if(filter_var($properties['username'], FILTER_VALIDATE_EMAIL)) {
+                    $email = str_replace(' ', '', $properties['username']);
+                } else {
+                    $userEntitys = $this->userRepository->findByUser($user);
+                    if(count($userEntitys) > 0 && array_key_exists('email', $userEntitys[0]->getProperties())) {
+                        $email = $userEntitys[0]->getProperties()['email'];
+                    }
+                }
+                if($email) {
+                    $this->mailService->sendMail($this->settings['resetPassword']['templatePathAndFilename'], ['username' => $properties['username'], 'password' => $password], $this->translator->translateById('content.subjectReset', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $email);
+                }
             } else {
                 throw new \Neos\Flow\Exception('The required field with the ID username is not defined.', 1347145544);
             }
-
         }
-
     }
 
 }
