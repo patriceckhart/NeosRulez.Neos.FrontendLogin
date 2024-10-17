@@ -57,6 +57,14 @@ Neos:
   Form:
     presets:
       default:
+        formElementTypes:
+          'NeosRulez.Neos.FrontendLogin:UsernamePassword':
+            renderingOptions:
+              templatePathPattern: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Form/{@type}.html'
+            superTypes:
+              'Neos.Form:FormElement': true
+            properties:
+              elementClassAttribute: form-control
         finisherPresets:
           'NeosRulez.Neos.FrontendLogin:Finisher.CreateUserFinisher':
             implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\CreateUserFinisher
@@ -67,10 +75,23 @@ Neos:
           'NeosRulez.Neos.FrontendLogin:Finisher.ResetPasswordFinisher':
             implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\ResetPasswordFinisher
             options: { }
+          'NeosRulez.Neos.FrontendLogin:Finisher.AuthenticationFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\AuthenticationFinisher
+            options: { }
         validatorPresets:
-          'NeosRulez.Neos.FrontendLogin:UserExistValidator':
-            implementationClassName: NeosRulez\Neos\FrontendLogin\Validation\Validator\UserExistValidator
+          'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Validator\UserExistValidator
+          'NeosRulez.Neos.FrontendLogin:Validator.UsernamePasswordValidator':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Validator\UsernamePasswordValidator
       bootstrap:
+        formElementTypes:
+          'NeosRulez.Neos.FrontendLogin:UsernamePassword':
+            renderingOptions:
+              templatePathPattern: 'resource://NeosRulez.Neos.FrontendLogin/Private/Templates/Form/{@type}.html'
+            superTypes:
+              'Neos.Form:FormElement': true
+            properties:
+              elementClassAttribute: form-control
         finisherPresets:
           'NeosRulez.Neos.FrontendLogin:Finisher.CreateUserFinisher':
             implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\CreateUserFinisher
@@ -81,9 +102,14 @@ Neos:
           'NeosRulez.Neos.FrontendLogin:Finisher.ResetPasswordFinisher':
             implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\ResetPasswordFinisher
             options: { }
+          'NeosRulez.Neos.FrontendLogin:Finisher.AuthenticationFinisher':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Finisher\AuthenticationFinisher
+            options: { }
         validatorPresets:
           'NeosRulez.Neos.FrontendLogin:Validator.UserExistValidator':
             implementationClassName: NeosRulez\Neos\FrontendLogin\Validator\UserExistValidator
+          'NeosRulez.Neos.FrontendLogin:Validator.UsernamePasswordValidator':
+            implementationClassName: NeosRulez\Neos\FrontendLogin\Validator\UsernamePasswordValidator
 NeosRulez:
   Neos:
     FrontendLogin:

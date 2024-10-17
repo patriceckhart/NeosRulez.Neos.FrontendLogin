@@ -1,0 +1,6 @@
+prototype(NeosRulez.Neos.FrontendLogin:Finisher.AuthenticationFinisher.Definition) < prototype(Neos.Form.Builder:Finisher.Definition) {
+    formElementType = 'NeosRulez.Neos.FrontendLogin:Finisher.AuthenticationFinisher'
+    options {
+        node = ${node}
+    }
+}

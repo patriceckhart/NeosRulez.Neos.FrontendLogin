@@ -1,0 +1,27 @@
+'NeosRulez.Neos.FrontendLogin:Finisher.AuthenticationFinisher':
+  superTypes:
+    'Neos.Form.Builder:AbstractFinisher': true
+  ui:
+    label: Authenticate finisher
+    icon: fas fa-sign-in-alt
+    inspector:
+      groups:
+        finisher:
+          icon: fas fa-sign-in-alt
+  properties:
+    redirectAfterLoginSuccess:
+      type: reference
+      ui:
+        label: Redirect after successful login
+        reloadPageIfChanged: true
+        inspector:
+          group: finisher
+          position: 1
+    redirectAfterLoginFailure:
+      type: reference
+      ui:
+        label: Redirect after failed login
+        reloadPageIfChanged: true
+        inspector:
+          group: finisher
+          position: 2
