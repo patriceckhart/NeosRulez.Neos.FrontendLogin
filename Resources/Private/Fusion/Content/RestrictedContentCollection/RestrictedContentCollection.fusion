@@ -11,3 +11,13 @@ prototype(NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection) < pr
         {props.nodes}
     `
 }
+
+prototype(NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection.Public) < prototype(NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection) {
+
+    nodes {
+        attributes {
+            class >
+            class = 'restricted-content-collection-public'
+        }
+    }
+}

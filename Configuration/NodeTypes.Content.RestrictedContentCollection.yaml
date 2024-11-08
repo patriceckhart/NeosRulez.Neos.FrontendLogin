@@ -3,7 +3,7 @@
     'Neos.Neos:Content': true
     'Neos.Neos:ContentCollection': true
   ui:
-    label: Restricted Content Collection
+    label: Restricted Content Collection (private)
     icon: fas fa-lock
     group: neosrulezNeosFrontendlogin
     help:
@@ -13,3 +13,22 @@
       '*': true
       'Neos.Neos:Content': true
       'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection': false
+      'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection.Public': false
+
+'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection.Public':
+  superTypes:
+    'Neos.Neos:Content': true
+    'Neos.Neos:ContentCollection': true
+  ui:
+    label: Restricted Content Collection (public)
+    icon: fas fa-lock
+    group: neosrulezNeosFrontendlogin
+    position: 'after NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection'
+    help:
+      message: 'The content of this content collection is only visible if no frontend user is logged in.'
+  constraints:
+    nodeTypes:
+      '*': true
+      'Neos.Neos:Content': true
+      'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection': false
+      'NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection.Public': false

@@ -7,11 +7,17 @@ privilegeTargets:
   Neos\ContentRepository\Security\Authorization\Privilege\Node\ReadNodePrivilege:
     'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection':
       matcher: 'nodeIsOfType("NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection")'
+    'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection.Public':
+      matcher: 'nodeIsOfType("NeosRulez.Neos.FrontendLogin:Content.RestrictedContentCollection.Public")'
+
 roles:
   'Neos.Flow:Everybody':
     privileges:
       -
         privilegeTarget: 'NeosRulez.Neos.FrontendLogin:LoginControllerActions'
+        permission: GRANT
+      -
+        privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection.Public'
         permission: GRANT
   'Neos.Neos:AbstractEditor':
     privileges:
@@ -21,8 +27,14 @@ roles:
       -
         privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection'
         permission: GRANT
+      -
+        privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection.Public'
+        permission: GRANT
   'NeosRulez.Neos.FrontendLogin:FrontendUser':
     privileges:
       -
         privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection'
         permission: GRANT
+      -
+        privilegeTarget: 'NeosRulez.Neos.FrontendLogin:RestrictedContentCollection.Public'
+        permission: DENY
