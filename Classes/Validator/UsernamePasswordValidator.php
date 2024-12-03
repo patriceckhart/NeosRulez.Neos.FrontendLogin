@@ -40,7 +40,7 @@ class UsernamePasswordValidator extends AbstractValidator
     protected function isValid($value)
     {
         if(is_array($value) && array_key_exists('username', $value) && array_key_exists('password', $value)) {
-            if(!$this->authenticationService->authenticate($value['username'], $value['password'])) {
+            if(!$this->authenticationService->validatePassword($value['username'], $value['password'])) {
                 $this->addError($this->translator->translateById('content.failure.message', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), 0);
             }
         } else {

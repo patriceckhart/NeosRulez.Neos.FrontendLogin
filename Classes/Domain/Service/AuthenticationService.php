@@ -78,4 +78,20 @@ class AuthenticationService
         return false;
     }
 
+    /**
+     * @param string $accountIdentifier
+     * @param string $password
+     * @return bool
+     */
+    public function validatePassword(string $accountIdentifier, string $password): bool
+    {
+        $account = $this->accountRepository->findActiveByAccountIdentifierAndAuthenticationProviderName($accountIdentifier, 'NeosRulez.Neos.FrontendLogin:NeosFrontend');
+        if($account !== null) {
+            if($this->hashService->validatePassword($password, $account->getCredentialsSource())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
