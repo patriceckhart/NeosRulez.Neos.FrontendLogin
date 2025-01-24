@@ -26,6 +26,9 @@
             <trans-unit id="content.inactive" xml:space="preserve">
 				<source>Inactive</source>
 			</trans-unit>
+            <trans-unit id="content.noAccount" xml:space="preserve">
+				<source>No account created</source>
+			</trans-unit>
         </body>
     </file>
 </xliff>

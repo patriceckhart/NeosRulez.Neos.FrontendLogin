@@ -43,3 +43,13 @@
           hidden: 'ClientEval:node.properties.adminConfirmation ? false : true'
           group: finisher
           position: after adminConfirmation
+    preventAccountCreation:
+      type: boolean
+      ui:
+        label: Don't create account
+        reloadPageIfChanged: true
+        help:
+          message: 'If this option is activated, no Neos Flow account will be created. Login is not possible.'
+        inspector:
+          group: finisher
+          position: end

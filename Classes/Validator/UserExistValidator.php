@@ -2,12 +2,13 @@
 namespace NeosRulez\Neos\FrontendLogin\Validator;
 
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Validation\Validator\AbstractValidator;
 
 /**
  * @api
  * @Flow\Scope("singleton")
  */
-class UserExistValidator extends \Neos\Flow\Validation\Validator\AbstractValidator
+class UserExistValidator extends AbstractValidator
 {
     /**
      * @Flow\Inject

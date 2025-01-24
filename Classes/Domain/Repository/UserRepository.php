@@ -16,16 +16,18 @@ class UserRepository extends Repository
 
     /**
      * @param array $properties
-     * @param \Neos\Neos\Domain\Model\User $user
+     * @param \Neos\Neos\Domain\Model\User|null $user
      * @return void
      */
-    public function createUser(array $properties, \Neos\Neos\Domain\Model\User $user):void
+    public function createUser(array $properties, \Neos\Neos\Domain\Model\User|null $user):void
     {
         $newUser = new \NeosRulez\Neos\FrontendLogin\Domain\Model\User();
         $newUser->setProperties(json_encode($properties, JSON_FORCE_OBJECT));
         $newUser->setModified(new \DateTime);
-        $newUser->setUser($user);
-        $newUser->setActive($properties['active']);
+        if($user !== null) {
+            $newUser->setUser($user);
+        }
+        $newUser->setActive((array_key_exists('active', $properties) ? $properties['active'] : true));
         $this->add($newUser);
     }
 }

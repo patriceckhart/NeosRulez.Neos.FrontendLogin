@@ -15,13 +15,14 @@ class User
 {
 
     /**
-     * @var \Neos\Neos\Domain\Model\User
+     * @var \Neos\Neos\Domain\Model\User|null
      * @ORM\OneToOne(cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
-    protected $user;
+    protected $user = null;
 
     /**
-     * @return \Neos\Neos\Domain\Model\User
+     * @return \Neos\Neos\Domain\Model\User|null
      */
     public function getUser()
     {
@@ -29,7 +30,7 @@ class User
     }
 
     /**
-     * @param \Neos\Neos\Domain\Model\User $user
+     * @param \Neos\Neos\Domain\Model\User|null $user
      */
     public function setUser($user)
     {

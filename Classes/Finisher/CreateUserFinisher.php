@@ -73,6 +73,7 @@ class CreateUserFinisher extends AbstractFinisher
         $sendCredentials = false;
         $adminConfirmation = false;
         $adminMail = false;
+        $preventAccountCreation = false;
         $finishers = $formRuntime->getFormDefinition()->getFinishers();
         foreach ($finishers as $finisher) {
             if(get_class($finisher) == 'NeosRulez\Neos\FrontendLogin\Finisher\CreateUserFinisher') {
@@ -88,6 +89,9 @@ class CreateUserFinisher extends AbstractFinisher
                         $adminMail = $finisher->options['adminMail'];
                     }
                 }
+                if(array_key_exists('preventAccountCreation', (array) $finisher->options)) {
+                    $preventAccountCreation = $finisher->options['preventAccountCreation'];
+                }
             }
         }
 
@@ -100,13 +104,16 @@ class CreateUserFinisher extends AbstractFinisher
                 }
 
                 if(filter_var($properties['username'], FILTER_VALIDATE_EMAIL)) {
-                    $password = $this->userService->generatePassword();
-                    $user = $this->userService->createUser($properties['username'], $password, $properties['firstname'], $properties['lastname'], [$role]);
+                    $user = null;
+                    if(!$preventAccountCreation) {
+                        $password = $this->userService->generatePassword();
+                        $user = $this->userService->createUser($properties['username'], $password, $properties['firstname'], $properties['lastname'], [$role]);
+                    }
                     $this->userRepository->createUser($properties, $user);
-                    if($sendCredentials) {
+                    if($sendCredentials && !$preventAccountCreation) {
                         $this->mailService->sendMail($this->settings['createUser']['templatePathAndFilename'], ['properties' => $properties, 'username' => $properties['username'], 'password' => $password, 'adminConfirmation' => $adminConfirmation], $this->translator->translateById('content.subjectCreate', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $properties['username']);
                     }
-                    if($adminConfirmation && $adminMail) {
+                    if($adminConfirmation && $adminMail && !$preventAccountCreation) {
                         $this->mailService->sendMail($this->settings['createUser']['confirmation']['templatePathAndFilename'], ['properties' => $properties, 'username' => $properties['username']], $this->translator->translateById('content.subjectCreateConfirm', [], null, null, $sourceName = 'Main', $packageKey = 'NeosRulez.Neos.FrontendLogin'), $this->settings['senderMail'], $adminMail);
                     }
                 } else {

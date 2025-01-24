@@ -65,15 +65,17 @@ class UserController extends ActionController
         $user->setProperties(json_encode($props, JSON_FORCE_OBJECT));
         $user->setModified(new \DateTime());
         $this->userRepository->update($user);
-        $name = new \Neos\Party\Domain\Model\PersonName('', $user->getProperty('firstname'), '', $user->getProperty('lastname'), '', $user->getProperty('username'));
-        $neosUser = $user->getUser();
-        $neosUser->setName($name);
-        $account = $neosUser->getAccounts()[0];
-        if(array_key_exists('role', $properties)) {
-            $account->setRoles([new Role($properties['role'])]);
+        if($user->getUser() !== null) {
+            $name = new \Neos\Party\Domain\Model\PersonName('', $user->getProperty('firstname'), '', $user->getProperty('lastname'), '', $user->getProperty('username'));
+            $neosUser = $user->getUser();
+            $neosUser->setName($name);
+            $account = $neosUser->getAccounts()[0];
+            if(array_key_exists('role', $properties)) {
+                $account->setRoles([new Role($properties['role'])]);
+            }
+            $this->accountRepository->update($account);
+            $this->userService->updateUser($neosUser);
         }
-        $this->accountRepository->update($account);
-        $this->userService->updateUser($neosUser);
         $this->redirect('index');
     }
 
@@ -111,7 +113,9 @@ class UserController extends ActionController
      */
     public function removeAction(\NeosRulez\Neos\FrontendLogin\Domain\Model\User $user):void
     {
-        $this->userService->deleteUser($user->getUser());
+        if($user->getUser() !== null) {
+            $this->userService->deleteUser($user->getUser());
+        }
         $this->userRepository->remove($user);
         $this->persistenceManager->persistAll();
         $this->redirect('index');

@@ -13,6 +13,7 @@ prototype(NeosRulez.Neos.FrontendLogin:Module.UserController.Index) < prototype(
 
                 <thead>
                 <tr>
+                    <td>Account</td>
                     <td>Username</td>
                     <td>Firstname</td>
                     <td>Lastname</td>
@@ -25,6 +26,12 @@ prototype(NeosRulez.Neos.FrontendLogin:Module.UserController.Index) < prototype(
                 <tbody>
                 <Neos.Fusion:Loop items={users} >
                     <tr>
+                        <td>
+                            <Neos.Fusion:Link.Action @if={item.user} href.action="edit" href.package="Neos.Neos" href.controller="Module\\Administration\\Users" href.arguments={{user: item.user}}>
+                                <span class="neos-badge neos-badge-success">{item.user.accounts[0].accountIdentifier}</span>
+                            </Neos.Fusion:Link.Action>
+                            <span @if={!item.user} class="neos-badge neos-badge-error">{I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.noAccount')}</span>
+                        </td>
                         <td>
                             {item.properties.username}
                         </td>
@@ -49,10 +56,10 @@ prototype(NeosRulez.Neos.FrontendLogin:Module.UserController.Index) < prototype(
                                 <Neos.Fusion:Link.Action class="neos-button neos-button-primary" href.action="edit" href.arguments={{user: item}}>
                                     <i class="fas fa-pen"></i>
                                 </Neos.Fusion:Link.Action>
-                                <Neos.Fusion:Link.Action @if.render={!item.active} class="neos-button neos-button-success" href.action="activate" href.arguments={{user: item}}>
+                                <Neos.Fusion:Link.Action @if.render={item.user && !item.active} class="neos-button neos-button-success" href.action="activate" href.arguments={{user: item}}>
                                     <i class="fas fa-check"></i>
                                 </Neos.Fusion:Link.Action>
-                                <Neos.Fusion:Link.Action @if.render={item.active} class="neos-button neos-button-warning" href.action="deactivate" href.arguments={{user: item}}>
+                                <Neos.Fusion:Link.Action @if.render={item.user && item.active} class="neos-button neos-button-warning" href.action="deactivate" href.arguments={{user: item}}>
                                     <i class="fas fa-ban"></i>
                                 </Neos.Fusion:Link.Action>
                                 <Neos.Fusion:Link.Action class="neos-button neos-button-danger" href.action="remove" href.arguments={{user: item}} onclick={'return confirm("' + I18n.translate('NeosRulez.Neos.FrontendLogin:Modules.FrontendLogin:content.confirm') + '");'}>
